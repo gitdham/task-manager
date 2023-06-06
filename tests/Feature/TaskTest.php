@@ -13,12 +13,7 @@ class TaskTest extends TestCase {
 
   public function test_task_can_be_created() {
     $task = Task::factory()->create();
-
-    $this->assertInstanceOf(Task::class, $task);
-    $this->assertDatabaseHas('tasks', [
-      'id' => $task->id,
-      'title' => $task->title,
-    ]);
+    $this->assertModelExists($task);
   }
 
   public function test_task_can_be_retrieved() {
@@ -51,8 +46,6 @@ class TaskTest extends TestCase {
     $createdTask = Task::factory()->create();
     Task::destroy($createdTask->id);
 
-    $this->assertDatabaseMissing('tasks', [
-      'id' => $createdTask->id,
-    ]);
+    $this->assertModelMissing($createdTask);
   }
 }
