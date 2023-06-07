@@ -12,7 +12,6 @@ return new class extends Migration {
     Schema::create('task_category', function (Blueprint $table) {
       $table->foreignId('task_id')->constrained()->cascadeOnDelete();
       $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-      $table->timestamps();
     });
   }
 
