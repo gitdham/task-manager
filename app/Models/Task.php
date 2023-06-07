@@ -39,14 +39,14 @@ class Task extends Model {
     /**
      * Get the category that related the task.
      */
-    public function category() {
-        return $this->belongsTo(Category::class);
+    public function categories() {
+        return $this->belongsToMany(Category::class, 'task_category')->using(TaskCategory::class);
     }
 
     /**
      * Get the tag that related the task.
      */
-    public function tag() {
-        return $this->belongsTo(Tag::class);
+    public function tags() {
+        return $this->belongsToMany(Tag::class, 'task_tag')->using(TaskTag::class);
     }
 }
