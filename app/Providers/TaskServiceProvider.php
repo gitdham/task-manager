@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Task;
 use App\Services\Impl\TaskServiceImpl;
 use App\Services\TaskService;
 use Illuminate\Contracts\Support\DeferrableProvider;
@@ -9,11 +10,13 @@ use Illuminate\Support\ServiceProvider;
 
 class TaskServiceProvider extends ServiceProvider implements DeferrableProvider {
     public array $singletons = [
-        TaskService::class => TaskServiceImpl::class
+        TaskService::class => TaskServiceImpl::class,
     ];
 
-    public function provides(): array {
-        return [TaskService::class];
+    public function provides() {
+        return [
+            TaskService::class,
+        ];
     }
 
     /**
