@@ -13,14 +13,28 @@ class TaskControllerTest extends TestCase {
 
   public function test_get_all_tasks() {
     // insert fake task
-    Task::factory()->create([
+    $task = Task::factory()->create([
       'title' => 'Task Title'
     ]);
 
     $this->get('/tasks')
-      ->assertStatus(200)
+      ->assertOk()
       ->assertSeeText('Task List')
       ->assertSeeText('Task Title');
+  }
+
+  public function test_show_task_form() {
+    $this->get('/tasks/create')
+      ->assertOk()
+      ->assertSeeText('Create New Task')
+      ->assertSeeText('Form Task')
+      ->assertSeeText('Title')
+      ->assertSeeText('Description')
+      ->assertSeeText('Due Date')
+      ->assertSeeText('Priority')
+      ->assertSeeText('Status')
+      ->assertSeeText('Reset')
+      ->assertSeeText('Submit');
   }
 
   public function test_create_new_task_success() {
@@ -36,9 +50,7 @@ class TaskControllerTest extends TestCase {
       'status' => 'pending'
     ];
 
-    $this->post('/tasks', $postData)
-      ->assertRedirect('/tasks');
-
+    $this->post('/tasks', $postData)->assertRedirect('/tasks');
     $this->assertDatabaseHas('tasks', $postData);
   }
 }

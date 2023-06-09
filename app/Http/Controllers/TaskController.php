@@ -22,14 +22,18 @@ class TaskController extends Controller {
       'tasks' => $this->taskService->getTasks()
     ];
 
-    return response()->view('task', $viewData);
+    return response()->view('task.index', $viewData);
   }
 
   /**
    * Show the form for creating a new resource.
    */
   public function create() {
-    //
+    $viewData = [
+      'title' => 'Create New Task',
+    ];
+
+    return response()->view('task.create', $viewData);
   }
 
   /**
