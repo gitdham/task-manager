@@ -5,6 +5,7 @@
 </head>
 
 <body>
+  <a href="/tasks/create">New Task</a>
   <table border="1">
     <thead>
       <tr>
